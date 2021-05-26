@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+
+    dea-ws:
+        build: ./dea-ws
+        container_name: dea-ws
+        working_dir: /app
+        networks:
+            - ws-sql-net
+        ports: 
+            - 3000:3000
+        tty: true
+    
+    dea-sql:
+        image: mysql:latest
+        container_name: dea-sql
+        command: --default-authentication-plugin=sql_native_password
+        volumes: 
+            - ./dea-sql:/docker-entrypoint-initdb.d
+        environment: 
+            MYSQL_ROOT_PASSWORD_FILE: DB_PASS
+            MYSQL_DATABASE: DB_DATABSE
+            MYSQL_USER: DB_PASS
+        networks:
+            - ws-sql-net
+        tty: true
+
+networks:
+    ws-sql-net:
+        driver: bridge
