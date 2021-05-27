@@ -1,12 +1,7 @@
-FROM alpine
-
-RUN apk update && apk add git
-RUN apk add nodejs npm
-
-RUN npm install -g @angular/cli
+FROM nginx 
 
 WORKDIR /app
 
 COPY . /app
 
-RUN npm install
+RUN nginx -t
