@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `deadb` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `deadb`;
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: deadb
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,15 +29,15 @@ CREATE TABLE `devices` (
   `secretKey` varchar(30) NOT NULL,
   `fkUser` int NOT NULL,
   `fkGeolocation` int NOT NULL,
-  `fkRecordsByMinute` int NOT NULL,
+  `fkRecordsInterval` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FkDeviceUser` (`fkUser`),
   KEY `FkDeviceGeolocation` (`fkGeolocation`),
-  KEY `FkDeviceRecordByMinute` (`fkRecordsByMinute`),
+  KEY `FkDeviceRecordInterval` (`fkRecordsInterval`),
   CONSTRAINT `FkDeviceGeolocation` FOREIGN KEY (`fkGeolocation`) REFERENCES `geolocation` (`id`),
-  CONSTRAINT `FkDeviceRecordByMinute` FOREIGN KEY (`fkRecordsByMinute`) REFERENCES `recordsbyminute` (`id`),
+  CONSTRAINT `FkDeviceRecordInterval` FOREIGN KEY (`fkRecordsInterval`) REFERENCES `recordsinterval` (`id`),
   CONSTRAINT `FkDeviceUser` FOREIGN KEY (`fkUser`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `geolocation` (
   `latitude` float DEFAULT NULL,
   `longitude` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,19 +71,19 @@ CREATE TABLE `records` (
   PRIMARY KEY (`id`),
   KEY `FkRecordDevice` (`fkDevice`),
   CONSTRAINT `FkRecordDevice` FOREIGN KEY (`fkDevice`) REFERENCES `devices` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `recordsbyminute`
+-- Table structure for table `recordsinterval`
 --
 
-DROP TABLE IF EXISTS `recordsbyminute`;
+DROP TABLE IF EXISTS `recordsinterval`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `recordsbyminute` (
+CREATE TABLE `recordsinterval` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `recordsMinute` int DEFAULT NULL,
+  `intervalTime` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -100,7 +100,7 @@ CREATE TABLE `users` (
   `name` varchar(30) NOT NULL,
   `surname` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -112,4 +112,9 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-20  9:37:58
+-- Dump completed on 2021-05-31 18:11:17
+
+
+CREATE USER 'dea'@'%' IDENTIFIED WITH mysql_native_password BY 'deaAdmin';
+
+GRANT all privileges ON deadb.* TO 'dea'@'%';
