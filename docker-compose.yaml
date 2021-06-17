@@ -2,6 +2,7 @@ version: "3.3"
 
 services:
     dea-ws:
+        restart: 'always'
         build: ./dea-ws
         container_name: dea-ws
         working_dir: /app
