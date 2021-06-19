@@ -13,6 +13,7 @@ router.get('/25/:id', (req, res) => {
         let arrayPm25 = data.map(record => record.pm25);
         res.json({ 'Pm25Avarage': arrayPm25.reduce(reducer) });
     })
+    res.end()
 
 })
 
@@ -23,6 +24,7 @@ router.get('/10/:id', (req, res) => {
         let arrayPm10 = data.map(record => record.pm10);
         res.json({ 'Pm10Avarage': arrayPm10.reduce(reducer) });
     })
+    res.end()
 })
 
 

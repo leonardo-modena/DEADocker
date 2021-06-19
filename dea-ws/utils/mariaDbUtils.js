@@ -8,8 +8,7 @@ var dbUtils = {
             if (!err) {
                 return res.json(data);
             } else {
-                console.log("Errore...");
-                res.json({ 'err': err })
+                console.log("Errore...", err);
             }
         })
     },
@@ -20,8 +19,7 @@ var dbUtils = {
             if (!err) {
                 return callback(data)
             } else {
-                console.log("Errore...");
-                res.json({ 'err': err })
+                console.log("Errore...", err);
             }
         })
     }
