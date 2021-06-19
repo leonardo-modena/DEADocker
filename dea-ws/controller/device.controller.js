@@ -3,7 +3,7 @@ exports.query = {
     findBySecretKey: `SELECT * FROM devices WHERE devices.secretKey = ?`,
     findById: `SELECT * FROM devices WHERE devices.id = ?`,
     findRecordsById: `SELECT * FROM records r WHERE r.fkDevice = ?`,
-    findUserById: `SELECT * FROM users u, devices d WHERE d.fkUser = u.id AND d.id = ?`,
+    findUserById: `select u.name, u.surname from users u, devices d where d.fkUser = u.id and u.id = ?;`,
     lastRecordById: `SELECT lastrecord.id, r.pm10, r.pm25, r.recordingtime, g.latitude, g.longitude FROM 
     (SELECT fkDevice, MAX(id) AS id FROM records GROUP BY fkDevice) lastrecord, records r, devices d, geolocation g WHERE lastrecord.id = r.id 
     AND lastrecord.fkDevice = d.id AND d.id = ?`,

@@ -4,6 +4,12 @@ let deviceController = require('../controller/device.controller.js');
 
 let router = express.Router();
 
+
+router.get('/:id', (req, res) => {
+    let id = req.params.id;
+    dbUtils.query(deviceController.query.findUserById, id, res);
+})
+
 router.put('/change_user/:id', (req, res) => {
     let id = req.params.id;
     let name = req.body.name;
@@ -13,11 +19,6 @@ router.put('/change_user/:id', (req, res) => {
 
     dbUtils.query(deviceController.query.updateSecretKey, params, res)
 
-})
-
-router.get('/:id', (req, res) => {
-    let id = req.params.id;
-    dbUtils.query(deviceController.query.findUserById, id, res);
 })
 
 module.exports = router;
