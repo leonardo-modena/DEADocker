@@ -7,6 +7,7 @@ var dbUtils = {
         connessione.query(query, params, (err, data) => {
             if (!err) {
                 return res.json(data);
+                console.log(data)
             } else {
                 console.log("Errore...", err);
             }
