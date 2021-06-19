@@ -3,7 +3,7 @@ exports.query = {
     findBySecretKey: `SELECT * FROM devices WHERE devices.secretKey = ?`,
     findById: `SELECT * FROM devices WHERE devices.id = ?`,
     findRecordsById: `SELECT * FROM records r WHERE r.fkDevice = ?`,
-    findUserById: `SELECT * FROM user u, devices d WHERE d.fkUser = u.id AND d.id = ?`,
+    findUserById: `SELECT * FROM users u, devices d WHERE d.fkUser = u.id AND d.id = ?`,
     lastRecordById: `SELECT lastrecord.id, r.pm10, r.pm25, r.recordingtime, g.latitude, g.longitude FROM 
     (SELECT fkDevice, MAX(id) AS id FROM records GROUP BY fkDevice) lastrecord, records r, devices d, geolocation g WHERE lastrecord.id = r.id 
     AND lastrecord.fkDevice = d.id AND d.id = ?`,
@@ -14,6 +14,6 @@ exports.query = {
     recordIntervalBySecretKey: `SELECT intervalTime from devices d, recordsinterval r where d.fkRecordsInterval = r.id AND d.secretKey = ?`,
     createRecord: `INSERT INTO records SET ?`,
     updateSecretKey: `UPDATE devices SET secretKey = ? WHERE id = ?;`,
-    updateUser: `UPDATE user SET name = ?, surname = ? WHERE id = ?;`,
+    updateUser: `UPDATE users SET name = ?, surname = ? WHERE id = ?;`,
 
 }
