@@ -13,7 +13,7 @@ var dbUtils = {
         })
     },
 
-    queryCallback: (query, params, res, callback) => {
+    queryCallback: (query, params, callback) => {
         var connessione = mysql.createConnection(config.databaseParams);
         connessione.query(query, params, (err, data) => {
             if (!err) {
