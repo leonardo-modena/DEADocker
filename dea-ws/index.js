@@ -22,6 +22,8 @@ const routerAvg24h = require('./route/avg24h.js');
 const routerLastRecord = require('./route/last-record.js');
 const routerRecords = require('./route/records.js');
 const routerRecordsInterval = require('./route/records-interval.js');
+const routerUser = require('./route/user.js');
+
 
 
 app.get('/', (req, res) => {
@@ -35,6 +37,8 @@ app.use('/avg24h', routerAvg24h)
 app.use('/last_record', routerLastRecord)
 app.use('/records', routerRecords)
 app.use('/records_interval', routerRecordsInterval)
+app.use('/user', routerUser)
+
 
 
 
