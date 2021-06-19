@@ -17,7 +17,7 @@ router.put('/change_user/:id', (req, res) => {
 
     let params = [name, surname, id]
 
-    dbUtils.query(deviceController.query.updateSecretKey, params, res)
+    dbUtils.query(deviceController.query.updateUser, params, res)
 
 })
 
