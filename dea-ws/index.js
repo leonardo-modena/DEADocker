@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const express = require('express')
-const cors = require('cors');
 const config = require('./config/config.js')
 const auth = require('./utils/auth.js');
 
@@ -9,7 +8,6 @@ const app = express()
 
 
 //abilita il cors per tutte le origini
-app.use( cors( { origin: '*' } ) );
 
 //abilita i middleware express che traducoino il body di una richiesta http in un oggetto json
 app.use(express.urlencoded())
@@ -21,6 +19,22 @@ const routerLastRecord = require('./route/last-record.js');
 const routerRecords = require('./route/records.js');
 const routerRecordsInterval = require('./route/records-interval.js');
 const routerUser = require('./route/user.js');
+
+app.use((req, res, next) => {
+  
+    // TODO Add origin validation
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control, Pragma');
+  
+    // intercept OPTIONS method
+    if (req.method === 'OPTIONS') {
+      res.sendStatus(204);
+    } else {
+      next();
+    }
+  });
 
 app.get('/', (req, res) => {
     res.send("Ciao questo é il Web Service di DEA project")
