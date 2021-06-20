@@ -7,22 +7,14 @@ const config = require('./config/config.js')
 const auth = require('./utils/auth.js');
 
 const app = express()
+//abilita il cors per tutte le origini
+app.use(cors());
 
 app.use(helmet());
 
 //abilita i middleware express che traducoino il body di una richiesta http in un oggetto json
 app.use(express.urlencoded())
 app.use(express.json())
-
-//abilita il cors per tutte le origini
-app.use(cors());
-
-const routerDevice = require('./route/device.js');
-const routerAvg24h = require('./route/avg24h.js');
-const routerLastRecord = require('./route/last-record.js');
-const routerRecords = require('./route/records.js');
-const routerRecordsInterval = require('./route/records-interval.js');
-const routerUser = require('./route/user.js');
 
 app.use(function (req, res, next) {
 
@@ -42,6 +34,14 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+const routerDevice = require('./route/device.js');
+const routerAvg24h = require('./route/avg24h.js');
+const routerLastRecord = require('./route/last-record.js');
+const routerRecords = require('./route/records.js');
+const routerRecordsInterval = require('./route/records-interval.js');
+const routerUser = require('./route/user.js');
+
 
 app.get('/', (req, res) => {
     res.send("Ciao questo é il Web Service di DEA project")
