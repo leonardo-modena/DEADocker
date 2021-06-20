@@ -9,7 +9,7 @@ const app = express()
 
 
 //abilita il cors per tutte le origini
-app.use(cors({origin: "*"}));
+app.use(cors());
 
 //abilita i middleware express che traducoino il body di una richiesta http in un oggetto json
 app.use(express.urlencoded())
