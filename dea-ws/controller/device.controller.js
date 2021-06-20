@@ -13,6 +13,7 @@ exports.query = {
     AND lastrecord.fkDevice = d.id AND d.fkGeolocation = g.id`,
     recordIntervalBySecretKey: `SELECT intervalTime from devices d, recordsinterval r where d.fkRecordsInterval = r.id AND d.secretKey = ?`,
     createRecord: `INSERT INTO records SET ?`,
+    createUser: `INSERT INTO users SET ?`,
     updateSecretKey: `UPDATE devices SET secretKey = ? WHERE id = ?;`,
     updateUser: `UPDATE users SET name = ?, surname = ? WHERE id = ?;`,
 

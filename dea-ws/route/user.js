@@ -10,6 +10,18 @@ router.get('/:id', (req, res) => {
     dbUtils.query(deviceController.query.findUserById, id, res);
 })
 
+router.post('/new_user', (req, res) => {
+    let user = req.body;
+    let newUser = {
+        'id': null,
+        'name': user.name,
+        'surname': user.surname
+    };
+
+    dbUtils.query(deviceController.query.createUser, newUser, res)
+
+})
+
 router.put('/change_user/:id', (req, res) => {
     let id = req.params.id;
     let name = req.body.name;
