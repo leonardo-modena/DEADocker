@@ -1,6 +1,11 @@
 version: "3.3"
 
 services:
+    dea-web: 
+        build: './dea-site/DEAWebSite'
+        container_name: dea-site
+        ports: 
+          - 80:80   
     dea-ws:
         restart: 'always'
         build: ./dea-ws
