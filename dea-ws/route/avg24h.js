@@ -11,34 +11,21 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
 router.get('/25/:id', (req, res) => {
     let id = req.params.id;
 
-    let arrayPm25;
-
     dbUtils.queryCallback(deviceController.query.Records24hourById, id, (data) => {
-        arrayPm25 = data.map(record => record.pm25);
+        let arrayPm25 = data.map(record => record.pm25);
+        res.json({ 'Pm25Avarage': arrayPm25.reduce(reducer) });
     })
-
-    console.log(arrayPm25);
-
-    let reduced = arrayPm25.reduce((accumulator, currentValue) => accumulator + currentValue);
-
-    console.log(reduced);
-
-    res.json({ 'Pm25Avarage': reduced });
 
 })
 
 router.get('/10/:id', (req, res) => {
     let id = req.params.id;
 
-    let arrayPm10;
-
     dbUtils.queryCallback(deviceController.query.Records24hourById, id, (data) => {
-        arrayPm10 = data.map(record => record.pm10);
+        let arrayPm10 = data.map(record => record.pm10);
+        res.json({ 'Pm10Avarage':  arrayPm10.reduce(reducer)});
     })
 
-    let reduced = arrayPm10.reduce((accumulator, currentValue) => accumulator + currentValue);
-
-    res.json({ 'Pm10Avarage':  reduced});
 })
 
 
