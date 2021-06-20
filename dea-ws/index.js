@@ -7,6 +7,7 @@ const auth = require('./utils/auth.js');
 
 const app = express()
 
+
 //abilita il cors per tutte le origini
 app.use(cors());
 
@@ -20,7 +21,6 @@ const routerLastRecord = require('./route/last-record.js');
 const routerRecords = require('./route/records.js');
 const routerRecordsInterval = require('./route/records-interval.js');
 const routerUser = require('./route/user.js');
-
 
 app.get('/', (req, res) => {
     res.send("Ciao questo é il Web Service di DEA project")
