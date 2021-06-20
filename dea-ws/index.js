@@ -28,12 +28,12 @@ app.get('/', (req, res) => {
 
 app.use(auth);
 
-app.use('/device', routerDevice)
-app.use('/avg24h', routerAvg24h)
-app.use('/last_record', routerLastRecord)
+app.use('/device', routerDevice, cors())
+app.use('/avg24h', routerAvg24h, cors())
+app.use('/last_record', routerLastRecord, cors())
 app.use('/records', routerRecords)
-app.use('/records_interval', routerRecordsInterval)
-app.use('/user', routerUser)
+app.use('/records_interval', routerRecordsInterval, cors())
+app.use('/user', routerUser, cors())
 
 
 

@@ -1,7 +1,6 @@
 let express = require('express');
 let dbUtils = require('../utils/mariaDbUtils.js')
-var cors = require("cors");
-app.use(cors());
+
 
 let deviceController = require('../controller/device.controller.js');
 
