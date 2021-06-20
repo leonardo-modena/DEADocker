@@ -2,15 +2,13 @@ require('dotenv').config();
 
 const express = require('express')
 const cors = require('cors');
-const helmet = require("helmet");
 const config = require('./config/config.js')
 const auth = require('./utils/auth.js');
 
 const app = express()
+
 //abilita il cors per tutte le origini
 app.use(cors());
-
-app.use(helmet());
 
 //abilita i middleware express che traducoino il body di una richiesta http in un oggetto json
 app.use(express.urlencoded())
