@@ -6,8 +6,8 @@ var dbUtils = {
         var connessione = mysql.createConnection(config.databaseParams);
         connessione.query(query, params, (err, data) => {
             if (!err) {
+                console.log(data, query, params)
                 return res.json(data);
-                console.log(data)
             } else {
                 console.log("Errore...", err);
             }
