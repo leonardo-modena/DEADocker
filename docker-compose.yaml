@@ -14,6 +14,7 @@ services:
     
     dea-sql:
         image: "mysql:latest"
+        command: --max_allowed_packet=32505856
         restart: 'always'
         container_name: dea-db
         volumes: 
