@@ -1032,33 +1032,33 @@ class HttpService {
     }
     login(secretKey) {
         console.log(this.headers);
-        return this.myhttp.get(`http://dea-ws:3200/device/by_secret_key/${secretKey}`, { headers: this.headers })
+        return this.myhttp.get(`http://deaproject.eu:3200/device/by_secret_key/${secretKey}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     lastRecord(id) {
-        return this.myhttp.get(`http://dea-ws:3200/last_record/${id}`, { headers: this.headers })
+        return this.myhttp.get(`http://deaproject.eu:3200/last_record/${id}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     avgPm10(id) {
-        return this.myhttp.get(`http://dea-ws:3200/avg24h/10/${id}`, { headers: this.headers })
+        return this.myhttp.get(`http://deaproject.eu:3200/avg24h/10/${id}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     avgPm25(id) {
-        return this.myhttp.get(`http://dea-ws:3200/avg24h/25/${id}`, { headers: this.headers })
+        return this.myhttp.get(`http://deaproject.eu:3200/avg24h/25/${id}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     user(id) {
-        return this.myhttp.get(`http://dea-ws:3200/user/${id}`, { headers: this.headers })
+        return this.myhttp.get(`http://deaproject.eu:3200/user/${id}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     newUser(name, surname) {
         let body = { name: name, surname: surname };
-        return this.myhttp.post(`http://dea-ws:3200/user/new_user`, body, { headers: this.headers })
+        return this.myhttp.post(`http://deaproject.eu:3200/user/new_user`, body, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     newSecretKey(id, passedSecretKey) {
         let body = { secretKey: passedSecretKey };
-        return this.myhttp.put(`http://dea-ws:3200/device/new_secret_key/${id}`, body, { headers: this.headers });
+        return this.myhttp.put(`http://deaproject.eu:3200/device/new_secret_key/${id}`, body, { headers: this.headers });
     }
 }
 HttpService.ɵfac = function HttpService_Factory(t) { return new (t || HttpService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
