@@ -383,16 +383,18 @@ class DashboardComponent {
         this.configCard = false;
         this.userEdit = false;
     }
-    ngOnInit() {
+    ngAfterContentInit() {
         this.dataService.data.subscribe(device => this.actualDevice = device);
         this.fkGeolocation = this.actualDevice[0].fkGeolocation;
         this.fkRecordsByMinute = this.actualDevice[0].fkRecordsByMinute;
         this.fkUser = this.actualDevice[0].fkUser;
         this.id = this.actualDevice[0].id;
         this.secretKey = this.actualDevice[0].secretKey;
-        this.getLastRecord();
-        this.getAvg();
-        this.getUser();
+        setTimeout(() => {
+            this.getLastRecord();
+            this.getAvg();
+            this.getUser();
+        }, 2000);
     }
     getUser() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -456,7 +458,7 @@ class DashboardComponent {
         this.userEdit = !this.userEdit;
     }
     newUserClick() {
-        this.httpService.newUser(this.nome, this.cognome);
+        this.httpService.newUser(this.nome, this.cognome).subscribe(record => console.log(record));
     }
 }
 DashboardComponent.ɵfac = function DashboardComponent_Factory(t) { return new (t || DashboardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_service_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_service_http_service_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"])); };
@@ -1026,37 +1028,37 @@ __webpack_require__.r(__webpack_exports__);
 class HttpService {
     constructor(myhttp) {
         this.myhttp = myhttp;
-        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('authorization', '318e4f91b76cdcd9e64dc647cea6e322ee675207581d927f71b8b7b496884170d8b3e964614e09b266cb8737605d389ec4d5037f4384791a06e5d1eed2585db1').set('Access-Control-Allow-Origin', "http://64.227.118.102");
+        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('authorization', '318e4f91b76cdcd9e64dc647cea6e322ee675207581d927f71b8b7b496884170d8b3e964614e09b266cb8737605d389ec4d5037f4384791a06e5d1eed2585db1');
     }
     login(secretKey) {
         console.log(this.headers);
-        return this.myhttp.get(`http://64.227.118.102:3200/device/by_secret_key/${secretKey}`, { headers: this.headers })
+        return this.myhttp.get(`dea-ws:3200/device/by_secret_key/${secretKey}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     lastRecord(id) {
-        return this.myhttp.get(`http://64.227.118.102:3200/last_record/${id}`, { headers: this.headers })
+        return this.myhttp.get(`dea-ws:3200/last_record/${id}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     avgPm10(id) {
-        return this.myhttp.get(`http://64.227.118.102:3200/avg24h/10/${id}`, { headers: this.headers })
+        return this.myhttp.get(`dea-ws:3200/avg24h/10/${id}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     avgPm25(id) {
-        return this.myhttp.get(`http://64.227.118.102:3200/avg24h/25/${id}`, { headers: this.headers })
+        return this.myhttp.get(`dea-ws:3200/avg24h/25/${id}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     user(id) {
-        return this.myhttp.get(`http://64.227.118.102:3200/user/${id}`, { headers: this.headers })
+        return this.myhttp.get(`dea-ws:3200/user/${id}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     newUser(name, surname) {
         let body = { name: name, surname: surname };
-        return this.myhttp.post(`http://64.227.118.102:3200/user/new_user`, body, { headers: this.headers })
+        return this.myhttp.post(`dea-ws:3200/user/new_user`, body, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     newSecretKey(id, passedSecretKey) {
         let body = { secretKey: passedSecretKey };
-        return this.myhttp.put(`http://64.227.118.102:3200/device/new_secret_key/${id}`, body, { headers: this.headers });
+        return this.myhttp.put(`dea-ws:3200/device/new_secret_key/${id}`, body, { headers: this.headers });
     }
 }
 HttpService.ɵfac = function HttpService_Factory(t) { return new (t || HttpService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };

@@ -807,8 +807,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       _createClass(DashboardComponent, [{
-        key: "ngOnInit",
-        value: function ngOnInit() {
+        key: "ngAfterContentInit",
+        value: function ngAfterContentInit() {
           var _this = this;
 
           this.dataService.data.subscribe(function (device) {
@@ -819,9 +819,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.fkUser = this.actualDevice[0].fkUser;
           this.id = this.actualDevice[0].id;
           this.secretKey = this.actualDevice[0].secretKey;
-          this.getLastRecord();
-          this.getAvg();
-          this.getUser();
+          setTimeout(function () {
+            _this.getLastRecord();
+
+            _this.getAvg();
+
+            _this.getUser();
+          }, 2000);
         }
       }, {
         key: "getUser",
@@ -964,7 +968,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "newUserClick",
         value: function newUserClick() {
-          this.httpService.newUser(this.nome, this.cognome);
+          this.httpService.newUser(this.nome, this.cognome).subscribe(function (record) {
+            return console.log(record);
+          });
         }
       }]);
 
@@ -2183,14 +2189,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, HttpService);
 
         this.myhttp = myhttp;
-        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('authorization', '318e4f91b76cdcd9e64dc647cea6e322ee675207581d927f71b8b7b496884170d8b3e964614e09b266cb8737605d389ec4d5037f4384791a06e5d1eed2585db1').set('Access-Control-Allow-Origin', "http://64.227.118.102");
+        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('authorization', '318e4f91b76cdcd9e64dc647cea6e322ee675207581d927f71b8b7b496884170d8b3e964614e09b266cb8737605d389ec4d5037f4384791a06e5d1eed2585db1');
       }
 
       _createClass(HttpService, [{
         key: "login",
         value: function login(secretKey) {
           console.log(this.headers);
-          return this.myhttp.get("http://64.227.118.102:3200/device/by_secret_key/".concat(secretKey), {
+          return this.myhttp.get("dea-ws:3200/device/by_secret_key/".concat(secretKey), {
             headers: this.headers
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (response) {
             return response;
@@ -2199,7 +2205,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "lastRecord",
         value: function lastRecord(id) {
-          return this.myhttp.get("http://64.227.118.102:3200/last_record/".concat(id), {
+          return this.myhttp.get("dea-ws:3200/last_record/".concat(id), {
             headers: this.headers
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (response) {
             return response;
@@ -2208,7 +2214,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "avgPm10",
         value: function avgPm10(id) {
-          return this.myhttp.get("http://64.227.118.102:3200/avg24h/10/".concat(id), {
+          return this.myhttp.get("dea-ws:3200/avg24h/10/".concat(id), {
             headers: this.headers
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (response) {
             return response;
@@ -2217,7 +2223,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "avgPm25",
         value: function avgPm25(id) {
-          return this.myhttp.get("http://64.227.118.102:3200/avg24h/25/".concat(id), {
+          return this.myhttp.get("dea-ws:3200/avg24h/25/".concat(id), {
             headers: this.headers
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (response) {
             return response;
@@ -2226,7 +2232,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "user",
         value: function user(id) {
-          return this.myhttp.get("http://64.227.118.102:3200/user/".concat(id), {
+          return this.myhttp.get("dea-ws:3200/user/".concat(id), {
             headers: this.headers
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (response) {
             return response;
@@ -2239,7 +2245,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             name: name,
             surname: surname
           };
-          return this.myhttp.post("http://64.227.118.102:3200/user/new_user", body, {
+          return this.myhttp.post("dea-ws:3200/user/new_user", body, {
             headers: this.headers
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (response) {
             return response;
@@ -2251,7 +2257,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var body = {
             secretKey: passedSecretKey
           };
-          return this.myhttp.put("http://64.227.118.102:3200/device/new_secret_key/".concat(id), body, {
+          return this.myhttp.put("dea-ws:3200/device/new_secret_key/".concat(id), body, {
             headers: this.headers
           });
         }

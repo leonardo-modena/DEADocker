@@ -6,6 +6,8 @@ services:
         container_name: dea-site
         ports: 
           - 80:80   
+        networks: 
+            -ws-ng-net
     dea-ws:
         restart: 'always'
         build: ./dea-ws
@@ -13,6 +15,7 @@ services:
         working_dir: /app
         networks:
             - ws-sql-net
+            - ws-ng-net
         ports: 
             - 3200:3200
         tty: true
@@ -32,4 +35,6 @@ services:
 
 networks:
     ws-sql-net:
+        driver: bridge
+    ws-ng-net:
         driver: bridge
