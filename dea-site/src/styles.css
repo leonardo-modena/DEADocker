@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
+:root {
+    font-size: 11px;
+    --primary-white: #f2f2f2;
+    --primary-black: #0d0d0d;
+    --primary-rose: #f2D5c4;
+    --primary-blue: #768Da6;
+    --secondary-blue: #B8D4F2;
+    --primary-green: #76a68a;
+    --secondary-green: #D0f2df;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    color: white !important;
+    border: none;
+    border-radius: 2px;
+    background-color: black;
+    color: var(--primary-withe);
+    text-align: center;
+    transition: background-color ease 0.3s;
+    height: 30px;
+    letter-spacing: 3px;
+}
+
+button:hover {
+    background-color: var(--primary-green);
+    transition: background-color ease 0.3s;
+}
+
+.container {
+    padding: 11px 18px;
+}
+
+.center {
+    text-align: center;
+}
+
+input:focus-visible {
+    outline: none !important;
+}
+
+h2 {
+    font-size: 32px;
+    letter-spacing: 4px;
+    line-height: 40px;
+    font-weight: 800;
+    font-family: 'Nanum Myeongjo', serif;
+    margin-bottom: 5px;
+    word-spacing: 5px;
+    padding: 18px;
+    text-align: center;
+}

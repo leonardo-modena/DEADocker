@@ -1,0 +1,23 @@
+<div class="container" id="registra-accedi-container">
+
+    <video autoplay muted loop id="registra-accedi-video">
+        <source src="../../assets/vid/grano.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <span >
+        <h2 class="center">ACCEDI</h2>
+        <div class="login-content">
+            <div class="login-container">
+
+                <label for="secret-id">
+                    <p>CODICE SEGRETO</p>
+                </label>
+                <input type="password" name="secret" id="secret-id" [(ngModel)]="secretKey">
+                <div>
+                    <button class="registra-accedi-button" (click)="accediClick(secretKey)">ACCEDI AL DISPOSITIVO</button>
+        </div>
+            </div>
+</div>
+</span>
+
+</div>
