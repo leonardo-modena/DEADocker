@@ -7,7 +7,7 @@ services:
         ports: 
           - 80:80   
         networks: 
-            -ws-ng-net
+            - ws-ng-net
     dea-ws:
         restart: 'always'
         build: ./dea-ws
