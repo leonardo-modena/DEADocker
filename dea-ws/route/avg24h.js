@@ -13,7 +13,7 @@ router.get('/25/:id', (req, res) => {
 
     dbUtils.queryCallback(deviceController.query.Records24hourById, id, (data) => {
         let arrayPm25 = data.map(record => record.pm25);
-        res.json({ 'Pm25Avarage': (arrayPm25.reduce(reducer) / 24).toPrecision(2) });
+        res.json({ 'Pm25Avarage': (arrayPm25.reduce(reducer) / arrayPm25.length).toPrecision(2) });
     })
 
 })
@@ -23,7 +23,7 @@ router.get('/10/:id', (req, res) => {
 
     dbUtils.queryCallback(deviceController.query.Records24hourById, id, (data) => {
         let arrayPm10 = data.map(record => record.pm10);
-        res.json({ 'Pm10Avarage':  (arrayPm10.reduce(reducer) / 24).toPrecision(2)});
+        res.json({ 'Pm10Avarage':  (arrayPm10.reduce(reducer) / arrayPm10.length).toPrecision(2)});
     })
 
 })
