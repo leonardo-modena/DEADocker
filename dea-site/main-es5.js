@@ -959,7 +959,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "newUserClick",
         value: function newUserClick() {
-          this.httpService.newUser(this.nome, this.cognome).subscribe(function (record) {
+          this.httpService.changeUser(this.nome, this.cognome, this.fkUser).subscribe(function (record) {
             return console.log(record);
           });
         }
@@ -2230,13 +2230,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
-        key: "newUser",
-        value: function newUser(name, surname) {
+        key: "changeUser",
+        value: function changeUser(name, surname, id) {
           var body = {
             name: name,
             surname: surname
           };
-          return this.myhttp.post("http://deaproject.eu:3200/user/new_user", body, {
+          return this.myhttp.put("http://deaproject.eu:3200/user/change_user/".concat(id), body, {
             headers: this.headers
           }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (response) {
             return response;

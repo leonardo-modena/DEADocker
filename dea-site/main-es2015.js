@@ -455,7 +455,7 @@ class DashboardComponent {
         this.userEdit = !this.userEdit;
     }
     newUserClick() {
-        this.httpService.newUser(this.nome, this.cognome).subscribe(record => console.log(record));
+        this.httpService.changeUser(this.nome, this.cognome, this.fkUser).subscribe(record => console.log(record));
     }
 }
 DashboardComponent.ɵfac = function DashboardComponent_Factory(t) { return new (t || DashboardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_service_data_service__WEBPACK_IMPORTED_MODULE_3__["DataService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_service_http_service_service__WEBPACK_IMPORTED_MODULE_4__["HttpService"])); };
@@ -1048,9 +1048,9 @@ class HttpService {
         return this.myhttp.get(`http://deaproject.eu:3200/user/${id}`, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
-    newUser(name, surname) {
+    changeUser(name, surname, id) {
         let body = { name: name, surname: surname };
-        return this.myhttp.post(`http://deaproject.eu:3200/user/new_user`, body, { headers: this.headers })
+        return this.myhttp.put(`http://deaproject.eu:3200/user/change_user/${id}`, body, { headers: this.headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(response => response));
     }
     newSecretKey(id, passedSecretKey) {
